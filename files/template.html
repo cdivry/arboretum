@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" />
+	<title>Liste des Arbres</title>
+	<style>
+	  %(CSS)s
+	</style>
+	<script>
+
+	  function el_hide(name) {
+		for (let el of document.querySelectorAll('.' + name)) {
+			el.classList.remove("active");
+			el.style.display = 'none';
+		}
+	  }
+
+	  function el_show(name) {
+		for (let el of document.querySelectorAll('.element')) {
+			if (el.className.indexOf(name) != -1 || el.innerHTML.toLowerCase().indexOf(name) != -1) {
+				el.style.display = 'block';
+			}
+		}
+	  }
+
+	  function el_display(elem) {
+		if (elem.classList.contains("active")) {
+			elem.classList.remove("active");
+		} else {
+			elem.classList.add("active");
+		}
+	  }
+
+	  function search(value) {
+		console.log('Recherche de : "' + value + '"');
+		if (value == "") {
+			el_show('element');
+		}
+		else {
+			el_hide('element');
+			el_show(value);
+		}
+	  }
+
+	</script>
+  </head>
+  <body>
+	<input id="search" type="text" placeholder="Rechercher un arbre précis ..." autofocus />
+
+	<br>
+
+	<div id="listing">
+	  %(LISTING)s
+	</div>
+
+
+	<script>
+	  document.getElementById('search').addEventListener('input', function (evt) {
+		search(this.value);
+	  });
+	</script>
+
+  </body>
+</html>
